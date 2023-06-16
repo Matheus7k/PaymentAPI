@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "Payment.API\Payment.API.csproj", "{2DE9C666-AB0B-4DF1-9102-280E8AD2481C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.API", "Payment.API\Payment.API.csproj", "{2DE9C666-AB0B-4DF1-9102-280E8AD2481C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{E7085B93-DE76-4FF8-BBD9-7534AA55D298}"
 EndProject
@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Infrastructure", "3 - Infrastructure", "{1495B913-E521-48CC-8D32-B5D2D4ADAD98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API.Domain", "Payment.API.Domain\Payment.API.Domain.csproj", "{1747932E-B54B-4D1B-B60B-E3A19F869265}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.API.Domain", "Payment.API.Domain\Payment.API.Domain.csproj", "{1747932E-B54B-4D1B-B60B-E3A19F869265}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API.Repository", "Payment.API.Repository\Payment.API.Repository.csproj", "{5F770E72-9BFF-4689-8CF3-394735938761}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1747932E-B54B-4D1B-B60B-E3A19F869265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1747932E-B54B-4D1B-B60B-E3A19F869265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1747932E-B54B-4D1B-B60B-E3A19F869265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F770E72-9BFF-4689-8CF3-394735938761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F770E72-9BFF-4689-8CF3-394735938761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F770E72-9BFF-4689-8CF3-394735938761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F770E72-9BFF-4689-8CF3-394735938761}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2DE9C666-AB0B-4DF1-9102-280E8AD2481C} = {E7085B93-DE76-4FF8-BBD9-7534AA55D298}
 		{1747932E-B54B-4D1B-B60B-E3A19F869265} = {738EF6A0-CB48-41DB-AF0F-5F7F31328719}
+		{5F770E72-9BFF-4689-8CF3-394735938761} = {1495B913-E521-48CC-8D32-B5D2D4ADAD98}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {698EF05E-4F95-4C3B-8839-DD85EF4AE216}
