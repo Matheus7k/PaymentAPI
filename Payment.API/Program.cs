@@ -1,5 +1,6 @@
 using MongoDB.Driver;
 using Payment.API.Domain.Commands.Payment.v1;
+using Payment.API.Domain.Contexts.v1;
 using Payment.API.Domain.Contracts.v1;
 using Payment.API.Domain.Queries.Payment.v1.List;
 using Payment.API.Repository;
@@ -21,6 +22,7 @@ builder.Services.Configure<MongoRepositorySettings>(mongoSettings);
 builder.Services.AddSingleton<IMongoClient>(new MongoClient(clientSettings));
 builder.Services.AddSingleton<IPaymentRepository, PaymentRepository>();
 
+builder.Services.AddScoped<PaymentContext>();
 builder.Services.AddScoped<PaymentCommandHandler>();
 builder.Services.AddScoped<ListPaymentQuery>();
 

@@ -18,7 +18,7 @@ namespace Payment.API.Controllers
         }
 
         [HttpPost(Name = "MakePayment")]
-        public Task<Domain.Entities.v1.Payment> MakePayment([FromBody] Domain.Entities.v1.Payment payment)
+        public Task<ActionResult<Domain.Entities.v1.Payment>> MakePayment([FromBody] Domain.Entities.v1.Payment payment)
         {
             return _paymentHandler.Insert(payment);
         }
