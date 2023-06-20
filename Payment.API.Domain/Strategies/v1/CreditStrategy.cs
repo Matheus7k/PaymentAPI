@@ -2,7 +2,7 @@
 
 namespace Payment.API.Domain.Strategies.v1
 {
-    public class CreditCardStrategy : IStrategy
+    public class CreditStrategy : IStrategy
     {
         public double Pay(double price)
         {
