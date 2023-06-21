@@ -1,8 +1,6 @@
 ﻿namespace Payment.API.Domain.Contracts.v1
 {
-    public interface IPaymentRepository
+    public interface IPaymentRepository : IBaseRepository<Entities.v1.Payment>
     {
-        Task InsertAsync(Entities.v1.Payment payment);
-        Task<IEnumerable<Entities.v1.Payment>> GetAllAsync();
     }
 }

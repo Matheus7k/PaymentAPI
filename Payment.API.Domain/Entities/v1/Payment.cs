@@ -2,7 +2,15 @@
 {
     public class Payment
     {
-        public int Id { get; set; }
+        public Payment(string cpf, string paymentForm, double price)
+        {
+            Id = new Guid();
+            Cpf = cpf;
+            PaymentForm = paymentForm;
+            Price = price;
+        }
+
+        public Guid Id { get; set; }
         public string Cpf { get; set; }
         public string PaymentForm { get; set; }
         public double Price { get; set; }

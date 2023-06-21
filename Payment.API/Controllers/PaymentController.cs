@@ -8,19 +8,19 @@ namespace Payment.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly PaymentCommandHandler _paymentHandler;
+        private readonly CreatePaymentCommandHandler _paymentHandler;
         private readonly ListPaymentQuery _listPayment;
 
-        public PaymentController(PaymentCommandHandler paymentHandler, ListPaymentQuery listPayment)
+        public PaymentController(CreatePaymentCommandHandler paymentHandler, ListPaymentQuery listPayment)
         {
             _paymentHandler = paymentHandler;
             _listPayment = listPayment;
         }
 
         [HttpPost(Name = "MakePayment")]
-        public Task<ActionResult<Domain.Entities.v1.Payment>> MakePayment([FromBody] Domain.Entities.v1.Payment payment)
+        public Task<ActionResult<Domain.Entities.v1.Payment>> MakePayment([FromBody] CreatePaymentCommand command)
         {
-            return _paymentHandler.Insert(payment);
+            return _paymentHandler.Insert(command);
         }
 
         [HttpGet(Name = "GetPayments")]
