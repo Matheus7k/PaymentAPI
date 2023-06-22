@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Payment.API.Domain.Commands.Payment.v1;
+using Payment.API.Domain.Commands.Payment.v1.Create;
 using Payment.API.Domain.Queries.Payment.v1.List;
 
 namespace Payment.API.Controllers

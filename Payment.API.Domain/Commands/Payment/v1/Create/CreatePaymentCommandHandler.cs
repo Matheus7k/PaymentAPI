@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Payment.API.Domain.Contexts.v1;
 using Payment.API.Domain.Contracts.v1;
 
-namespace Payment.API.Domain.Commands.Payment.v1
+namespace Payment.API.Domain.Commands.Payment.v1.Create
 {
     public class CreatePaymentCommandHandler
     {
@@ -37,7 +37,7 @@ namespace Payment.API.Domain.Commands.Payment.v1
             catch
             {
                 return new BadRequestObjectResult("Metodo de pagamento não encontrado!");
-            }            
+            }
         }
     }
 }
