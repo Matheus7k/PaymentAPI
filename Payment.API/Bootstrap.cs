@@ -8,6 +8,7 @@ using Payment.API.Domain.Contexts.v1;
 using Payment.API.Domain.Helpers.v1;
 using Payment.API.Domain.Commands.Payment.v1.Create;
 using Payment.API.Domain.Commands.Order.v1.Create;
+using Payment.API.Domain.Queries.Order.v1.List;
 
 namespace Payment.API
 {
@@ -34,6 +35,7 @@ namespace Payment.API
         private static void AddQueries(this IServiceCollection services)
         {
             services.AddScoped<ListPaymentQuery>();
+            services.AddScoped<ListOrderQuery>();
         }
 
         private static void AddMappers(this IServiceCollection services)
