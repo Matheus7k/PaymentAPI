@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using Payment.API.Domain.Commands.Payment.v1;
 using Payment.API.Domain.Contracts.v1;
 using Payment.API.Repository.Repositories;
 using Payment.API.Repository;
@@ -7,6 +6,8 @@ using Payment.API.Domain.Queries.Payment.v1.List;
 using Payment.API.Domain.Strategies.v1;
 using Payment.API.Domain.Contexts.v1;
 using Payment.API.Domain.Helpers.v1;
+using Payment.API.Domain.Commands.Payment.v1.Create;
+using Payment.API.Domain.Commands.Order.v1.Create;
 
 namespace Payment.API
 {
@@ -27,6 +28,7 @@ namespace Payment.API
         private static void AddCommands(this IServiceCollection services)
         {
             services.AddScoped<CreatePaymentCommandHandler>();
+            services.AddScoped<CreateOrderCommandHandler>();
         }
 
         private static void AddQueries(this IServiceCollection services)
@@ -37,7 +39,8 @@ namespace Payment.API
         private static void AddMappers(this IServiceCollection services)
         {
             services.AddAutoMapper(
-                typeof(CreatePaymentCommandProfile));
+                typeof(CreatePaymentCommandProfile),
+                typeof(CreateOrderCommandProfile));
         }
 
         private static void AddStrategies(this IServiceCollection services)
@@ -65,6 +68,7 @@ namespace Payment.API
             services.Configure<MongoRepositorySettings>(mongoSettings);
             services.AddSingleton<IMongoClient>(new MongoClient(clientSettings));
             services.AddSingleton<IPaymentRepository, PaymentRepository>();
+            services.AddSingleton<IOrderRepository, OrderRepository>();
         }
     }
 }
