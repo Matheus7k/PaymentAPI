@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using MediatR;
 using Payment.API.Domain.Contracts.v1;
-using Payment.API.Domain.Entities.v1;
 
 namespace Payment.API.Domain.Commands.Order.v1.Create
 {
-    public class CreateOrderCommandHandler
+    public class CreateOrderCommandHandler : BaseHandler, IRequestHandler<CreateOrderCommand, Entities.v1.Order>
     {
         private readonly IMapper _mapper;
         private readonly IOrderRepository _orderRepository;
@@ -15,7 +15,7 @@ namespace Payment.API.Domain.Commands.Order.v1.Create
             _mapper = mapper;
         }
 
-        public async Task<Entities.v1.Order> Insert(CreateOrderCommand command)
+        public async Task<Entities.v1.Order> Handle(CreateOrderCommand command, CancellationToken cancellation)
         {
             var entity = _mapper.Map<Entities.v1.Order>(command);
 

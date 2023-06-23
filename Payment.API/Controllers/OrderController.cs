@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Payment.API.Domain.Commands.Order.v1.Create;
 using Payment.API.Domain.Queries.Order.v1.List;
 
@@ -8,25 +9,24 @@ namespace Payment.API.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly CreateOrderCommandHandler _orderHandler;
-        private readonly ListOrderQuery _listOrder;
+        private readonly IMediator _mediator;
 
-        public OrderController(CreateOrderCommandHandler orderhandler, ListOrderQuery listOrder)
+        public OrderController(IMediator mediator)
         {
-            _orderHandler = orderhandler;
-            _listOrder = listOrder;
+            _mediator = mediator;
         }
 
         [HttpPost(Name = "CreateOrder")]
-        public Task<Domain.Entities.v1.Order> InsertOrder([FromBody] CreateOrderCommand command)
+        public Task<Domain.Entities.v1.Order> InsertOrder([FromBody] CreateOrderCommand command, CancellationToken cancellation)
         {
-            return _orderHandler.Insert(command);
+            return _mediator.Send(command, cancellation);
         }
 
         [HttpGet(Name = "ListOrders")]
-        public Task<IEnumerable<Domain.Entities.v1.Order>> GetOrders()
+        public Task<IEnumerable<ListOrderQueryResponse>> GetOrders(CancellationToken cancellation)
         {
-            return _listOrder.List();
+            var query = new ListOrderQuery();
+            return _mediator.Send(query, cancellation);
         }
     }
 }
