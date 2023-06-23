@@ -9,6 +9,7 @@ using Payment.API.Domain.Helpers.v1;
 using Payment.API.Domain.Commands.Payment.v1.Create;
 using Payment.API.Domain.Commands.Order.v1.Create;
 using Payment.API.Domain.Queries.Order.v1.List;
+using Payment.API.Domain;
 
 namespace Payment.API
 {
@@ -23,6 +24,7 @@ namespace Payment.API
             services.AddMappers();
             services.AddFactories();
             services.AddRepositories(configuration);
+            services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<BaseHandler>());
             return services;
         }
 
@@ -34,15 +36,17 @@ namespace Payment.API
 
         private static void AddQueries(this IServiceCollection services)
         {
-            services.AddScoped<ListPaymentQuery>();
-            services.AddScoped<ListOrderQuery>();
+            services.AddScoped<ListPaymentQueryHandler>();
+            services.AddScoped<ListOrderQueryHandler>();
         }
 
         private static void AddMappers(this IServiceCollection services)
         {
             services.AddAutoMapper(
                 typeof(CreatePaymentCommandProfile),
-                typeof(CreateOrderCommandProfile));
+                typeof(CreateOrderCommandProfile),
+                typeof(ListPaymentQueryProfile),
+                typeof(ListOrderQueryProfile));
         }
 
         private static void AddStrategies(this IServiceCollection services)
