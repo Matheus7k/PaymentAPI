@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Payment.API.Domain.Contexts.v1;
 using Payment.API.Domain.Contracts.v1;
 
 namespace Payment.API.Domain.Commands.Payment.v1.Create
 {
-    public class CreatePaymentCommandHandler
+    public class CreatePaymentCommandHandler : BaseHandler, IRequestHandler<CreatePaymentCommand, ActionResult<Entities.v1.Payment>>
     {
         private readonly IMapper _mapper;
         private readonly PaymentContext _context;
@@ -20,7 +21,7 @@ namespace Payment.API.Domain.Commands.Payment.v1.Create
             _paymentRepository = paymentRepository;
         }
 
-        public async Task<ActionResult<Entities.v1.Payment>> Insert(CreatePaymentCommand command)
+        public async Task<ActionResult<Entities.v1.Payment>> Handle(CreatePaymentCommand command, CancellationToken cancellation)
         {
             try
             {

@@ -1,6 +1,9 @@
-﻿namespace Payment.API.Domain.Commands.Payment.v1.Create
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Payment.API.Domain.Commands.Payment.v1.Create
 {
-    public class CreatePaymentCommand
+    public class CreatePaymentCommand : IRequest<ActionResult<Entities.v1.Payment>>
     {
         public CreatePaymentCommand(string cpf, double price, string paymentForm)
         {

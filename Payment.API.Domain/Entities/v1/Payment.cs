@@ -1,6 +1,4 @@
-﻿using Payment.API.Domain.Commands.Payment.v1;
-
-namespace Payment.API.Domain.Entities.v1
+﻿namespace Payment.API.Domain.Entities.v1
 {
     public class Payment
     {

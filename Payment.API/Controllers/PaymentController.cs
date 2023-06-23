@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Payment.API.Domain.Commands.Payment.v1.Create;
 using Payment.API.Domain.Queries.Payment.v1.List;
 
@@ -8,25 +9,24 @@ namespace Payment.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly CreatePaymentCommandHandler _paymentHandler;
-        private readonly ListPaymentQuery _listPayment;
+        private readonly IMediator _mediator;
 
-        public PaymentController(CreatePaymentCommandHandler paymentHandler, ListPaymentQuery listPayment)
+        public PaymentController(IMediator mediator)
         {
-            _paymentHandler = paymentHandler;
-            _listPayment = listPayment;
+            _mediator = mediator;
         }
 
         [HttpPost(Name = "MakePayment")]
-        public Task<ActionResult<Domain.Entities.v1.Payment>> MakePayment([FromBody] CreatePaymentCommand command)
+        public async Task<ActionResult<Domain.Entities.v1.Payment>> MakePayment([FromBody] CreatePaymentCommand command, CancellationToken cancellation)
         {
-            return _paymentHandler.Insert(command);
+            return await _mediator.Send(command, cancellation);
         }
 
         [HttpGet(Name = "GetPayments")]
-        public Task<IEnumerable<Domain.Entities.v1.Payment>> GetPayments()
+        public async Task<IEnumerable<ListPaymentQueryResponse>> GetPayments(CancellationToken cancellation)
         {
-            return _listPayment.List();
+            var query = new ListPaymentQuery();
+            return await _mediator.Send(query, cancellation);
         }
     }
 }
