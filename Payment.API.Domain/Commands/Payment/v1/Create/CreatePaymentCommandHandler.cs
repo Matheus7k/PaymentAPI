@@ -11,13 +11,15 @@ namespace Payment.API.Domain.Commands.Payment.v1.Create
         private readonly IMapper _mapper;
         private readonly PaymentContext _context;
         private readonly IPaymentFactory _paymentFactory;
-        private readonly IPaymentRepository _paymentRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IBaseRepository<Entities.v1.Payment> _paymentRepository;
 
-        public CreatePaymentCommandHandler(IPaymentRepository paymentRepository, PaymentContext context, IPaymentFactory paymentFactory, IMapper mapper)
+        public CreatePaymentCommandHandler(IUnitOfWork unitOfWork, PaymentContext context, IPaymentFactory paymentFactory, IMapper mapper, IBaseRepository<Entities.v1.Payment> paymentRepository)
         {
             _mapper = mapper;
             _context = context;
             _paymentFactory = paymentFactory;
+            _unitOfWork = unitOfWork;
             _paymentRepository = paymentRepository;
         }
 
@@ -31,7 +33,9 @@ namespace Payment.API.Domain.Commands.Payment.v1.Create
 
                 entity.Price = _context.ExecutePayment(strategy, entity.Price);
 
-                await _paymentRepository.InsertAsync(entity);
+                _paymentRepository.InsertAsync(entity);
+
+                await _unitOfWork.Commit();
 
                 return entity;
             }

@@ -6,13 +6,14 @@ namespace Payment.API.Domain.Queries.Payment.v1.List
 {
     public class ListPaymentQueryHandler : BaseHandler, IRequestHandler<ListPaymentQuery, IEnumerable<ListPaymentQueryResponse>>
     {
-        private readonly IPaymentRepository _paymentRepository;
+        private readonly IBaseRepository<Entities.v1.Payment> _paymentRepository;
         private readonly IMapper _mapper;
 
-        public ListPaymentQueryHandler(IPaymentRepository paymentRepository, IMapper mapper)
+        public ListPaymentQueryHandler(IMapper mapper, IBaseRepository<Entities.v1.Payment> paymentRepository)
         {
-            _paymentRepository = paymentRepository;
             _mapper = mapper;
+            _paymentRepository = paymentRepository;
+
         }
 
         public async Task<IEnumerable<ListPaymentQueryResponse>> Handle(ListPaymentQuery query, CancellationToken cancellation)

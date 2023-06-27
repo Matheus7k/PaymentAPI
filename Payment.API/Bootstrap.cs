@@ -10,6 +10,7 @@ using Payment.API.Domain.Commands.Payment.v1.Create;
 using Payment.API.Domain.Commands.Order.v1.Create;
 using Payment.API.Domain.Queries.Order.v1.List;
 using Payment.API.Domain;
+using Payment.API.Repository.Contexts;
 
 namespace Payment.API
 {
@@ -23,6 +24,8 @@ namespace Payment.API
             services.AddContexts();
             services.AddMappers();
             services.AddFactories();
+            services.AddUnitOfWork();
+            services.AddRepositoriesContexts();
             services.AddRepositories(configuration);
             services.AddMediatR(config => config.RegisterServicesFromAssemblyContaining<BaseHandler>());
             return services;
@@ -62,6 +65,11 @@ namespace Payment.API
             services.AddScoped<PaymentContext>();
         }
 
+        private static void AddUnitOfWork(this IServiceCollection services)
+        {
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
+        }
+
         private static void AddFactories(this IServiceCollection services)
         {
             services.AddScoped<IPaymentFactory, PaymentFactory>();
@@ -73,8 +81,12 @@ namespace Payment.API
             var clientSettings = MongoClientSettings.FromConnectionString(mongoSettings.Get<MongoRepositorySettings>().ConnectionString);
             services.Configure<MongoRepositorySettings>(mongoSettings);
             services.AddSingleton<IMongoClient>(new MongoClient(clientSettings));
-            services.AddSingleton<IPaymentRepository, PaymentRepository>();
-            services.AddSingleton<IOrderRepository, OrderRepository>();
+            services.AddSingleton(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+        }
+
+        private static void AddRepositoriesContexts(this IServiceCollection services)
+        {
+            services.AddSingleton<IMongoContext, MongoContext>();
         }
     }
 }

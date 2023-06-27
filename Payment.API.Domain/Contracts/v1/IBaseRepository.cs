@@ -2,7 +2,7 @@
 {
     public interface IBaseRepository<TEntity>
     {
-        Task InsertAsync(TEntity entity);
+        void InsertAsync(TEntity entity);
         Task<IEnumerable<TEntity>> GetAllAsync();
     }
 }
